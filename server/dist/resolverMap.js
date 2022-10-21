@@ -1,10 +1,15 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const resolverMap = {
-    Query: {
-        helloWorld(_, args) {
-            return `Hello world`;
-        },
-    },
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports.default = resolverMap;
+Object.defineProperty(exports, "__esModule", { value: true });
+const api_1 = __importDefault(require("./api"));
+const quotes = api_1.default;
+const resolvers = {
+    Query: {
+        getQuotes: (_root, _args, _context, _info) => {
+            return quotes;
+        }
+    }
+};
+exports.default = resolvers;

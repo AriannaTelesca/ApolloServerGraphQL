@@ -1,3 +1,8 @@
+type Quote {
+  quote: String!
+  author: String!
+}
+
 type Query {
-    helloWorld : String!
+    getQuotes : [Quote]
 }

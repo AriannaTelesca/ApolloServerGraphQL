@@ -1,11 +1,13 @@
-import { IResolvers } from '@graphql-tools/utils';
+import apiQuotes from './api';
 
-const resolverMap: IResolvers = {
+const quotes = apiQuotes;
+
+const resolvers = {
     Query: {
-        helloWorld(_: void, args: void): string {
-            return `Hello world`;
-        },
-    },
+        getQuotes: (_root:void, _args:void, _context:void, _info:void) => {
+            return quotes;
+        }
+    }
 };
 
-export default resolverMap;
+export default resolvers;
