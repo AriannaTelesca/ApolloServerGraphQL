@@ -24,7 +24,7 @@ const mount = async (app: Application) => {
 
 
     httpServer.listen(
-        { port: 3000 },
+        { port: process.env.PORT || 3000 },
         (): void => console.log(`\ Graphql is now running on http://3000/graphql`)
     );
     }
