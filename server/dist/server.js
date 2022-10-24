@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const apollo_server_express_1 = require("apollo-server-express");
-const graphql_depth_limit_1 = __importDefault(require("graphql-depth-limit"));
 const http_1 = require("http");
 const compression_1 = __importDefault(require("compression"));
 const cors_1 = __importDefault(require("cors"));
@@ -13,8 +12,7 @@ const schema_1 = __importDefault(require("./schema"));
 const mount = async (app) => {
     try {
         const server = new apollo_server_express_1.ApolloServer({
-            schema: schema_1.default,
-            validationRules: [(0, graphql_depth_limit_1.default)(7)],
+            schema: schema_1.default
         });
         await server.start();
         server.applyMiddleware({ app, path: '/graphql' });

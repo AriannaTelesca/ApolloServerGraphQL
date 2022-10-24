@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import depthLimit from 'graphql-depth-limit';
+// import depthLimit from 'graphql-depth-limit';
 import { createServer } from 'http';
 import compression from 'compression';
 import cors from 'cors';
@@ -10,8 +10,8 @@ const mount = async (app: Application) => {
     try {
 
     const server = new ApolloServer({
-    schema,
-    validationRules : [depthLimit(7)],
+    schema
+    // validationRules : [depthLimit(7)],
     });
 
     await server.start();
