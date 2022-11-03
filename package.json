@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "concurrently": "^7.5.0",
+    "start": "concurrently \"node 'server/dist/server.js'\" \"react-scripts start\" "
+  }
+}
