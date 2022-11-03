@@ -4,6 +4,7 @@ import { createServer } from 'http';
 import compression from 'compression';
 import cors from 'cors';
 import schema from './schema';
+import path from 'path';
 
 const mount = async (app: Application) => {
     try {
@@ -19,6 +20,10 @@ const mount = async (app: Application) => {
 
     app.use('*', cors());
     app.use(compression());
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+      });
 
     
     httpServer.listen(
