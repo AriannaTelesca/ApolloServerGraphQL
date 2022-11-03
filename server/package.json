@@ -5,6 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node 'dist/server.js'",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "build": "tsc -p . && ncp src/schema dist/schema",
     "start:dev": "npm run build:dev",
     "build:dev": "nodemon 'src/server.ts' --exec 'ts-node' src/server.ts -e ts,graphql",
