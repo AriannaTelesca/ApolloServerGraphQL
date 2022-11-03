@@ -1,66 +1,69 @@
-let nouns: string[] = ["cat", "girl", "boy", "dog", "man", "friend", "police", "rain", "univers", "computer", "doctor", "sea", "chicken", "tree", "dinosaur", "happiness", "freedom", "nature", "son", "sun"];
-let verbs: string[] = ["run", "kiss", "send", "listen", "narrow", "pretend", "target", "knock", "deem", "slide", "lay", " facilitate", "slip", "found", "resign", "display", "fill", "belong", "comment", "buy"];
-let adjectives: string[] = ["beautiful", "lazy", "wooden", "lovely", "dumb", "rough", "soft", "warm", "oceanic", "talented", "fierce", "third", "sparkling", "impressive", "tearful", "cheap", "royal", "cool", "safe", "foolish"];
-let adverbs: string[] = ["slowly", "elegantly", "precisely", "quickly", "sadly", "humbly", "proudly", "shockingly", "calmly", "passionately", "generously", "possibly", "warmly", "regularly", "poorly", "continually", "especially", "usually", "too", "devotedly"];
-let preposition: string[] = ["down", "into", "up", "on", "upon", "below", "above", "through", "across", "towards"];
-
+const nouns: string[] = ["cat", "girl", "boy", "dog", "man", "friend", "police", "rain", "univers", "computer", "doctor", "sea", "chicken", "tree", "dinosaur", "happiness", "freedom", "nature", "son", "sun"];
+const verbs: string[] = ["run", "kiss", "send", "listen", "narrow", "pretend", "target", "knock", "deem", "slide", "lay", " facilitate", "slip", "found", "resign", "display", "fill", "belong", "comment", "buy"];
+const adjectives: string[] = ["beautiful", "lazy", "wooden", "lovely", "dumb", "rough", "soft", "warm", "oceanic", "talented", "fierce", "third", "sparkling", "impressive", "tearful", "cheap", "royal", "cool", "safe", "foolish"];
+const adverbs: string[] = ["slowly", "elegantly", "precisely", "quickly", "sadly", "humbly", "proudly", "shockingly", "calmly", "passionately", "generously", "possibly", "warmly", "regularly", "poorly", "continually", "especially", "usually", "too", "devotedly"];
+const preposition: string[] = ["down", "into", "up", "on", "upon", "below", "above", "through", "across", "towards"];
 
 let quot: string[] = [];
 
-function sentence() {
-  var rand1 = Math.floor(Math.random() * 20);
-  var rand2 = Math.floor(Math.random() * 20);
-  var rand3 = Math.floor(Math.random() * 20);
-  var rand4 = Math.floor(Math.random() * 20);
-  var rand5 = Math.floor(Math.random() * 20);
-  var rand6 = Math.floor(Math.random() * 10);
-  var content = "The " + adjectives[rand1] + " " + nouns[rand2] + " " + verbs[rand3] + " because the " + nouns[rand4] + " " + adverbs[rand5] + " " + verbs[rand6] + " " + preposition[rand6] + " a " + adjectives[rand2] + " " + nouns[rand5] + ".";
+function getRandomNumber (rand: number, n : number) : number {
+  rand = Math.floor(Math.random() * n);
+  return rand;
+}
 
-quot.push(content);
+let rand1 : number;
+let rand2 : number;
+let rand3 : number;
+let rand4 : number;
+let rand5 : number;
+
+function sentence() : void {
+  let content : string = `The ${adjectives[getRandomNumber(rand1, 20)]} ${nouns[getRandomNumber(rand2, 20)]} ${verbs[getRandomNumber(rand3, 20)]} because the ${nouns[getRandomNumber(rand4, 20)]} ${adverbs[getRandomNumber(rand2, 20)]} ${verbs[getRandomNumber(rand1, 20)]} ${preposition[getRandomNumber(rand5, 10)]} a ${adjectives[getRandomNumber(rand3, 20)]} ${nouns[getRandomNumber(rand4, 20)]}.`;
+
+  quot.push(content);
 
 };
 
-for(let x: number = 0; x<100; x++){
+for ( let x: number = 0; x<100; x++ ) {
   sentence();
 };
 
-let firstname: string[] = ['John', 'Timur', 'Guillaume', 'Sophie', 'Dante', 'Jilani', 'Arnaud', 'Bhama', 'Clément', 'Arianna', 'Anthony', 'Arthur', 'Framçois', 'Younes', 'Naim', 'Felicien', 'Arnold', 'Quentin', 'Omar', 'Mhedi'];
-let lastname: string[] = ['Camilleri', 'Tabucchi', 'Bocaccio', 'Calvino', 'Alighieri', 'Sapienza', 'Morante', 'Ottieri', 'Pasolini', 'Leopardi', 'Manzoni', 'Tolstoj', 'Dostoevskij', 'Flaubert', 'Stendal', 'Proust', 'Woolf', 'Wallace', 'Pessoa', 'Rimbaud']
-
-// var faker = require('faker');
+const firstname: string[] = ['John', 'Timur', 'Guillaume', 'Sophie', 'Dante', 'Jilani', 'Arnaud', 'Bhama', 'Clément', 'Arianna', 'Anthony', 'Arthur', 'François', 'Younes', 'Naim', 'Felicien', 'Arnold', 'Quentin', 'Omar', 'Mhedi'];
+const lastname: string[] = ['Camilleri', 'Tabucchi', 'Bocaccio', 'Calvino', 'Alighieri', 'Sapienza', 'Morante', 'Ottieri', 'Pasolini', 'Leopardi', 'Manzoni', 'Tolstoj', 'Dostoevskij', 'Flaubert', 'Stendal', 'Proust', 'Woolf', 'Wallace', 'Pessoa', 'Rimbaud']
 
 let nameA: string[] = [];
 
-function author() {
-  var rand1 = Math.floor(Math.random() * 20);
-  var rand2 = Math.floor(Math.random() * 20);
-  var name = firstname[rand1] + " " + lastname[rand2];
+function author() : void {
+  var name = `${firstname[getRandomNumber(rand1, 20)]} ${lastname[getRandomNumber(rand2, 20)]}`;
 
   nameA.push(name);
-
 }
 
-for(let x: number = 0; x<100; x++){
+for ( let x: number = 0; x<100; x++ ) {
     author();
 }
 
+interface api {
+  author : string;
+  quote : string
+}
 
-let apiQuotes: object[] = [];
+let apiQuotes : api[] = [];
 
-for(let x: number = 0; x<100; x++){
+for ( let x: number = 0; x<100; x++ ) {
   let sent:
    {
     author: string;
     quote: string
    }
 
-  sent = {
-  author : nameA[x],
-  quote : quot[x]
-  }
+  sent = 
+    {
+      author : nameA[x],
+      quote : quot[x]
+    }
 
   apiQuotes.push(sent);
 }
-
 
 export default apiQuotes;

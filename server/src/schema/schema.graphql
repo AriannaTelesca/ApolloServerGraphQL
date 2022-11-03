@@ -4,5 +4,13 @@ type Quote {
 }
 
 type Query {
-    getQuotes : [Quote]
+  getQuotes : [Quote]
 }
+
+type Query {
+  quote(author: String!) : [Quote]
+}
+
+type Query {
+ search(text: String) : [Quote]
+ }

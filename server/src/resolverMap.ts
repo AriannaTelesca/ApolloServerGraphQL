@@ -1,13 +1,21 @@
+import { text } from 'stream/consumers';
 import apiQuotes from './api';
 
-const quotes = apiQuotes;
 
 const resolvers = {
     Query: {
-        getQuotes: (_root:void, _args:void, _context:void, _info:void) => {
-            return quotes;
+        getQuotes: () => {
+            return apiQuotes;
+        },
+
+        quote: (_: any, { author }:{ author: string }, context: any ) => {
+            return apiQuotes.filter((quote) => quote.author === author );
+        },
+
+        search: (_: any, { text } : { text: string}, context: any) => {
+            return apiQuotes.filter((quote) => quote.author.match(text)); 
         }
-    }
-};
+}
+}
 
 export default resolvers;

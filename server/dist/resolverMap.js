@@ -4,11 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const api_1 = __importDefault(require("./api"));
-const quotes = api_1.default;
 const resolvers = {
     Query: {
-        getQuotes: (_root, _args, _context, _info) => {
-            return quotes;
+        getQuotes: () => {
+            return api_1.default;
+        },
+        quote: (_, { author }, context) => {
+            return api_1.default.filter((quote) => quote.author === author);
+        },
+        search: (_, { text }, context) => {
+            return api_1.default.filter((quote) => quote.author.match(text));
         }
     }
 };
