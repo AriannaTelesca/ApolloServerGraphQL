@@ -6,6 +6,10 @@ import cors from 'cors';
 import schema from './schema';
 
 const mount = async (app: Application) => {
+
+    const express = require("express");
+    const path = require("path");
+
     try {
 
     const server = new ApolloServer({
@@ -19,6 +23,13 @@ const mount = async (app: Application) => {
 
     app.use('*', cors());
     app.use(compression());
+
+
+
+//This will create a middleware.
+//When you navigate to the root page, it would use the built react-app
+    app.use(express.static(path.resolve(__dirname, "./client/build")));
+
 
 
     httpServer.listen(
