@@ -3,6 +3,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { createServer } from 'http';
 import compression from 'compression';
 import cors from 'cors';
+import path from 'path';
 import schema from './schema';
 
 const mount = async (app: Application) => {
@@ -20,9 +21,8 @@ const mount = async (app: Application) => {
 
     app.use('*', cors());
     app.use(compression());
-    app.get('*', (req, res) => {
-        res.redirect('./client/public/index.html')
-      });
+
+    app.use('/static', express.static(path.join(__dirname, 'public', 'index.html')));
     
     httpServer.listen(
         { port: process.env.PORT || 4000 },
