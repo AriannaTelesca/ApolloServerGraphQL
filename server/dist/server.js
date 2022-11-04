@@ -20,7 +20,7 @@ const mount = async (app) => {
         app.use('*', (0, cors_1.default)());
         app.use((0, compression_1.default)());
         app.get('*', (req, res) => {
-            res.redirect('/app');
+            res.redirect('./client/public/index.html');
         });
         httpServer.listen({ port: process.env.PORT || 4000 }, () => console.log(`\ Graphql is now running on http://4000/graphql`));
     }

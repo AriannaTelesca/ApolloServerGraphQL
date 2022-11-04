@@ -21,7 +21,7 @@ const mount = async (app: Application) => {
     app.use('*', cors());
     app.use(compression());
     app.get('*', (req, res) => {
-        res.redirect('/app')
+        res.redirect('./client/public/index.html')
       });
     
     httpServer.listen(
