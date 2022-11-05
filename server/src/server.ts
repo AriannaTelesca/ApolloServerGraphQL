@@ -22,8 +22,13 @@ const mount = async (app: Application) => {
     app.use('*', cors());
     app.use(compression());
 
-    app.use('/static', express.static(path.join(__dirname, 'public', 'index.html')));
-    
+    app.use(express.static(path.join(__dirname, 'build')));
+
+    app.get('/', function (req, res) {
+        res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    });
+
+   
     httpServer.listen(
         { port: process.env.PORT || 4000 },
         (): void => console.log(`\ Graphql is now running on http://4000/graphql`)
