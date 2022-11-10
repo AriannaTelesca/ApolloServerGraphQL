@@ -9,12 +9,6 @@ import schema from './schema';
 const mount = async (app: Application) => {
 
     
-    app.use(express.static(path.join(__dirname, '../client/build')));
-
-    app.get('*', function (req, res) {
-        res.sendFile(path.join(__dirname + '../client/build/index.html'));
-    });
-    
     try {
 
     const server = new ApolloServer({
@@ -22,6 +16,12 @@ const mount = async (app: Application) => {
     });
 
     await server.start();
+
+    app.use(express.static(path.join(__dirname, '../client/public')));
+
+    app.get('*', function (req, res) {
+        res.sendFile(path.join(__dirname + '../client/public/index.html'));
+    });
 
     server.applyMiddleware({ app, path: '/graphql' });
 
