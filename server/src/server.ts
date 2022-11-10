@@ -7,6 +7,13 @@ import path from 'path';
 import schema from './schema';
 
 const mount = async (app: Application) => {
+
+    
+    app.use(express.static(path.join(__dirname, '../client/build')));
+
+    app.get('*', function (req, res) {
+        res.sendFile(path.join(__dirname + '../client/build/index.html'));
+    });
     
     try {
 
@@ -15,6 +22,7 @@ const mount = async (app: Application) => {
     });
 
     await server.start();
+
     server.applyMiddleware({ app, path: '/graphql' });
 
     const httpServer = createServer(app);
@@ -22,13 +30,7 @@ const mount = async (app: Application) => {
     app.use('*', cors());
     app.use(compression());
 
-    app.use(express.static(path.join(__dirname, '../client/build')));
-
-    app.get('*', function (req, res) {
-        res.sendFile(path.join(__dirname + '../client/build/index.html'));
-    });
-
-   
+  
     httpServer.listen(
         { port: process.env.PORT || 4000 },
         (): void => console.log(`\ Graphql is now running on http://4000/graphql`)

@@ -11,6 +11,10 @@ const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
 const schema_1 = __importDefault(require("./schema"));
 const mount = async (app) => {
+    app.use(express_1.default.static(path_1.default.join(__dirname, '../client/build')));
+    app.get('*', function (req, res) {
+        res.sendFile(path_1.default.join(__dirname + '../client/build/index.html'));
+    });
     try {
         const server = new apollo_server_express_1.ApolloServer({
             schema: schema_1.default
@@ -20,10 +24,6 @@ const mount = async (app) => {
         const httpServer = (0, http_1.createServer)(app);
         app.use('*', (0, cors_1.default)());
         app.use((0, compression_1.default)());
-        app.use(express_1.default.static(path_1.default.join(__dirname, '../client/build')));
-        app.get('*', function (req, res) {
-            res.sendFile(path_1.default.join(__dirname + '../client/build/index.html'));
-        });
         httpServer.listen({ port: process.env.PORT || 4000 }, () => console.log(`\ Graphql is now running on http://4000/graphql`));
     }
     catch (error) {
