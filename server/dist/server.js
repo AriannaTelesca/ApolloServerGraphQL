@@ -20,9 +20,9 @@ const mount = async (app) => {
         const httpServer = (0, http_1.createServer)(app);
         app.use('*', (0, cors_1.default)());
         app.use((0, compression_1.default)());
-        app.use(express_1.default.static(path_1.default.join(__dirname, 'client')));
+        app.use(express_1.default.static(path_1.default.join(__dirname, '../client')));
         app.get('*', function (req, res) {
-            res.sendFile(path_1.default.join(__dirname, 'client/build', 'index.html'));
+            res.sendFile(path_1.default.join(__dirname, '../client/build', 'index.html'));
         });
         httpServer.listen({ port: process.env.PORT || 4000 }, () => console.log(`\ Graphql is now running on http://4000/graphql`));
     }
