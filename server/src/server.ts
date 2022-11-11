@@ -26,6 +26,9 @@ const mount = async (app: Application) => {
 
     const httpServer = createServer(app);
 
+    app.use('*', cors());
+    app.use(compression());
+
     if (process.env.NODE_ENV === "production") {
         app.use(express.static("../client/build"));
         app.get("/*", function(req, res) {
@@ -37,9 +40,6 @@ const mount = async (app: Application) => {
           res.sendFile(path.join(__dirname, "../client/public/index.html"));
         });
       }
-
-    app.use('*', cors());
-    app.use(compression());
 
   
     httpServer.listen(

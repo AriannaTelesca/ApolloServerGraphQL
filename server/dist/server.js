@@ -18,6 +18,8 @@ const mount = async (app) => {
         await server.start();
         server.applyMiddleware({ app, path: '/graphql' });
         const httpServer = (0, http_1.createServer)(app);
+        app.use('*', (0, cors_1.default)());
+        app.use((0, compression_1.default)());
         if (process.env.NODE_ENV === "production") {
             app.use(express_1.default.static("../client/build"));
             app.get("/*", function (req, res) {
@@ -30,8 +32,6 @@ const mount = async (app) => {
                 res.sendFile(path_1.default.join(__dirname, "../client/public/index.html"));
             });
         }
-        app.use('*', (0, cors_1.default)());
-        app.use((0, compression_1.default)());
         httpServer.listen({ port: process.env.PORT || 4000 }, () => console.log(`\ Graphql is now running on http://4000/graphql`));
     }
     catch (error) {
