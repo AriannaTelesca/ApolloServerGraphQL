@@ -2,7 +2,7 @@
   "scripts": {
     "start": "concurrently \"cd server && npm start\" \"cd client && npm start\" ",
     "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\" ",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "dependencies": {
     "concurrently": "^7.5.0"
