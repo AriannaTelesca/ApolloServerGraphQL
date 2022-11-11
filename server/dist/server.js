@@ -18,17 +18,15 @@ const mount = async (app) => {
         await server.start();
         server.applyMiddleware({ app, path: '/graphql' });
         const httpServer = (0, http_1.createServer)(app);
+        app.use('*', (0, cors_1.default)());
+        app.use((0, compression_1.default)());
         if (process.env.NODE_ENV === "production") {
-            app.use('*', (0, cors_1.default)());
-            app.use((0, compression_1.default)());
             app.use(express_1.default.static("../client/build"));
             app.get("*", function (req, res) {
                 res.sendFile(path_1.default.join(__dirname, "../client/build/index.html"));
             });
         }
         else {
-            app.use('*', (0, cors_1.default)());
-            app.use((0, compression_1.default)());
             app.use(express_1.default.static(path_1.default.join(__dirname, "../client/public")));
             app.get("*", function (req, res) {
                 res.sendFile(path_1.default.join(__dirname, "../client/public/index.html"));
