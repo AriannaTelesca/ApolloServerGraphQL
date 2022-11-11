@@ -15,13 +15,9 @@ const mount = async (app: Application) => {
     // });
     
     try {
-
     const server = new ApolloServer({
     schema
     });
-
-    app.use('*', cors());
-    app.use(compression());
 
     await server.start();
 
@@ -31,11 +27,17 @@ const mount = async (app: Application) => {
 
 
     if (process.env.NODE_ENV === "production") {
+        app.use('*', cors());
+        app.use(compression());
+ 
         app.use(express.static("../client/build"));
         app.get("*", function(req, res) {
           res.sendFile(path.join(__dirname, "../client/build/index.html"));
         });
       } else {
+        app.use('*', cors());
+        app.use(compression());
+    
         app.use(express.static(path.join(__dirname, "../client/public")));
         app.get("*", function(req, res) {
           res.sendFile(path.join(__dirname, "../client/public/index.html"));
