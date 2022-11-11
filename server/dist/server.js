@@ -11,6 +11,8 @@ const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
 const schema_1 = __importDefault(require("./schema"));
 const mount = async (app) => {
+    app.use('*', (0, cors_1.default)());
+    app.use((0, compression_1.default)());
     try {
         const server = new apollo_server_express_1.ApolloServer({
             schema: schema_1.default
@@ -18,8 +20,6 @@ const mount = async (app) => {
         await server.start();
         server.applyMiddleware({ app, path: '/graphql' });
         const httpServer = (0, http_1.createServer)(app);
-        app.use('*', (0, cors_1.default)());
-        app.use((0, compression_1.default)());
         if (process.env.NODE_ENV === "production") {
             app.use(express_1.default.static("../client/build"));
             app.get("/*", function (req, res) {
