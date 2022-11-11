@@ -13,7 +13,7 @@ import {
 
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql'
+  uri: 'https://apollofakesquotes.herokuapp.com/graphql'
 });
 
 const client = new ApolloClient({
