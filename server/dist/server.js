@@ -11,15 +11,15 @@ const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
 const schema_1 = __importDefault(require("./schema"));
 const mount = async (app) => {
+    app.use(express_1.default.static(path_1.default.join(__dirname, '../client/public')));
+    app.get('*', function (req, res) {
+        res.sendFile(path_1.default.join(__dirname + '../client/public/index.html'));
+    });
     try {
         const server = new apollo_server_express_1.ApolloServer({
             schema: schema_1.default
         });
         await server.start();
-        app.use(express_1.default.static(path_1.default.join(__dirname, '../client/public')));
-        app.get('*', function (req, res) {
-            res.sendFile(path_1.default.join(__dirname + '../client/public/index.html'));
-        });
         server.applyMiddleware({ app, path: '/graphql' });
         const httpServer = (0, http_1.createServer)(app);
         app.use('*', (0, cors_1.default)());
