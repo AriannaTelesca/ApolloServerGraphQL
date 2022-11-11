@@ -20,6 +20,9 @@ const mount = async (app: Application) => {
     schema
     });
 
+    app.use('*', cors());
+    app.use(compression());
+
     await server.start();
 
     server.applyMiddleware({ app, path: '/graphql' });
@@ -27,10 +30,7 @@ const mount = async (app: Application) => {
     const httpServer = createServer(app);
 
 
-    app.use('*', cors());
-    app.use(compression());
-
-     if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV === "production") {
         app.use(express.static("../client/build"));
         app.get("*", function(req, res) {
           res.sendFile(path.join(__dirname, "../client/build/index.html"));
