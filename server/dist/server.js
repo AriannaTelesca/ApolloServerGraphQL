@@ -22,13 +22,13 @@ const mount = async (app) => {
         app.use((0, compression_1.default)());
         if (process.env.NODE_ENV === "production") {
             app.use(express_1.default.static("../client/build"));
-            app.get("/*", function (req, res) {
+            app.get("*", function (req, res) {
                 res.sendFile(path_1.default.join(__dirname, "../client/build/index.html"));
             });
         }
         else {
             app.use(express_1.default.static(path_1.default.join(__dirname, "../client/public")));
-            app.get("/*", function (req, res) {
+            app.get("*", function (req, res) {
                 res.sendFile(path_1.default.join(__dirname, "../client/public/index.html"));
             });
         }
