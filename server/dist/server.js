@@ -19,13 +19,13 @@ const mount = async (app) => {
         server.applyMiddleware({ app, path: '/graphql' });
         const httpServer = (0, http_1.createServer)(app);
         if (process.env.NODE_ENV === "production") {
-            app.use(express_1.default.static("client/build"));
+            app.use(express_1.default.static("../client/build"));
             app.get("/*", function (req, res) {
                 res.sendFile(path_1.default.join(__dirname, "../client/build/index.html"));
             });
         }
         else {
-            app.use(express_1.default.static(path_1.default.join(__dirname, "/client/public")));
+            app.use(express_1.default.static(path_1.default.join(__dirname, "../client/public")));
             app.get("/*", function (req, res) {
                 res.sendFile(path_1.default.join(__dirname, "../client/public/index.html"));
             });
