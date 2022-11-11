@@ -1,6 +1,6 @@
 ## Random Quotes  
 
-Link : [Random Quotes] (https://apollofakesquotes.herokuapp.com/).
+Link : [Random Quotes](https://apollofakesquotes.herokuapp.com/).
 
 Random Quotes is a projet in node.js and react.js with TypeScirpt, Apollo and GraphQL.
 
